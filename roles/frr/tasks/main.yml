@@ -1,0 +1,5 @@
+- name: Add static route to FRR routers
+  hosts: frr_routers
+  become: yes
+  roles:
+    - frr

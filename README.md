@@ -19,13 +19,20 @@ ansible/
         │   └── main.yml
         └── templates
             └── static_route.j2
-
-
+```
 
 ## Inventory File (`inventory/hosts`)
 
 Define your target hosts in an inventory file.
-
 ```ini
 [frr_routers]
 router1 ansible_host=192.168.1.1 ansible_user=your_user ansible_password=your_password
+```
+
+## Requirements
+Ansible 2.9 or later
+Devices running Free Range Routing (FRR)
+SSH access to the target devices with appropriate user permissions
+
+## Author
+This playbook was created by Ehsan Momeni Bashusqeh.

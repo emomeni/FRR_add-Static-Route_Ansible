@@ -29,6 +29,22 @@ Define your target hosts in an inventory file.
 router1 ansible_host=192.168.1.1 ansible_user=your_user ansible_password=your_password
 ```
 
+## Playbook (playbooks/add_static_route.yml)
+Create a playbook to execute the role.
+
+```plaintext
+- name: Add static route to FRR routers
+  hosts: frr_routers
+  become: yes
+  roles:
+    - frr
+  vars:
+    static_route:
+      destination: "10.0.0.0/24"
+      next_hop: "192.168.1.254"
+```
+
+
 ## Requirements
 Ansible 2.9 or later
 Devices running Free Range Routing (FRR)

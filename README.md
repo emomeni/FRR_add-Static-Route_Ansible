@@ -102,9 +102,11 @@ vars:
 ```
 
 ## Requirements
+```plaintext
 Ansible 2.9 or later
 Devices running Free Range Routing (FRR)
 SSH access to the target devices with appropriate user permissions
+```
 
 ## Author
 This playbook was created by Ehsan Momeni Bashusqeh.

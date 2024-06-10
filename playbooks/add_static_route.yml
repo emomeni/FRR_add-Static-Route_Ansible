@@ -3,3 +3,12 @@
   become: yes
   roles:
     - frr
+- name: Add static route to FRR routers
+  hosts: frr_routers
+  become: yes
+  roles:
+    - frr
+  vars:
+    static_route:
+      destination: "10.0.0.0/24"
+      next_hop: "192.168.1.254"

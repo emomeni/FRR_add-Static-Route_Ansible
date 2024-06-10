@@ -44,6 +44,62 @@ Create a playbook to execute the role.
       next_hop: "192.168.1.254"
 ```
 
+## Role Tasks (roles/frr/tasks/main.yml)
+Define the tasks to configure the static route.
+```ini
+- name: Ensure FRR is installed
+  package:
+    name: frr
+    state: present
+
+- name: Template the static route configuration
+  template:
+    src: static_route.j2
+    dest: /etc/frr/staticd.conf
+    owner: frr
+    group: frr
+    mode: 0644
+  notify: restart frr
+
+- name: Ensure FRR service is running
+  service:
+    name: frr
+    state: started
+    enabled: yes
+```
+
+## Template (roles/frr/templates/static_route.j2)
+Create a template file to define the static route configuration.
+```ini
+ip route {{ static_route.destination }} {{ static_route.next_hop }}
+```
+
+## Handlers (roles/frr/handlers/main.yml)
+Define handlers to restart FRR if the configuration changes.
+```ini
+- name: restart frr
+  service:
+    name: frr
+    state: restarted
+```
+
+## Variables
+You can define variables in a vars directory or directly in the playbook. For simplicity, let's include it in the playbook as shown above.
+
+## Running the Playbook
+Navigate to your ansible directory and run the playbook with the following command:
+```ini
+ansible-playbook -i inventory/hosts playbooks/add_static_route.yml
+```
+
+## Customizing the Static Route
+To customize the static route, modify the destination and next_hop variables in the playbook:
+```ini
+vars:
+  static_route:
+    destination: "your_destination_network"
+    next_hop: "your_next_hop_ip"
+```
 
 ## Requirements
 Ansible 2.9 or later

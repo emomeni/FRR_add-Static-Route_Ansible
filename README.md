@@ -91,6 +91,8 @@ Navigate to your ansible directory and run the playbook with the following comma
 ```ini
 ansible-playbook -i inventory/hosts playbooks/add_static_route.yml
 ```
+This playbook ensures FRR is installed, templates the static route configuration into the staticd.conf file, and restarts the FRR service to apply the changes.
+You can modify the destination and next_hop variables to suit your requirements.
 
 ## Customizing the Static Route
 To customize the static route, modify the destination and next_hop variables in the playbook:
@@ -100,14 +102,6 @@ vars:
     destination: "your_destination_network"
     next_hop: "your_next_hop_ip"
 ```
-
-## Execute the Playbook
-Navigate to your ansible directory and run the playbook with the following command:
-```ini
-ansible-playbook -i inventory/hosts playbooks/add_static_route.yml
-```
-This playbook ensures FRR is installed, templates the static route configuration into the staticd.conf file, and restarts the FRR service to apply the changes.
-You can modify the destination and next_hop variables to suit your requirements.
 
 ## Requirements
 ```plaintext

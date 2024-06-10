@@ -1,5 +1,19 @@
-- name: Add static route to FRR routers
-  hosts: frr_routers
-  become: yes
-  roles:
-    - frr
+- name: Ensure FRR is installed
+  package:
+    name: frr
+    state: present
+
+- name: Template the static route configuration
+  template:
+    src: static_route.j2
+    dest: /etc/frr/staticd.conf
+    owner: frr
+    group: frr
+    mode: 0644
+  notify: restart frr
+
+- name: Ensure FRR service is running
+  service:
+    name: frr
+    state: started
+    enabled: yes

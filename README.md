@@ -32,7 +32,7 @@ router1 ansible_host=192.168.1.1 ansible_user=your_user ansible_password=your_pa
 ## Playbook (playbooks/add_static_route.yml)
 Create a playbook to execute the role.
 
-```plaintext
+```ini
 - name: Add static route to FRR routers
   hosts: frr_routers
   become: yes
